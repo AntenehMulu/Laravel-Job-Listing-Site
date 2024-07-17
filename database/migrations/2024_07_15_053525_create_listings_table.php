@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('listings', function (Blueprint $table) {
             //company,location, email,website, description
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('logo')->nullable();
             $table->string('tag');
             $table->string('company');
             $table->string('email');
@@ -22,6 +24,7 @@ return new class extends Migration
             $table->string('location');
             $table->mediumText('description');
             $table->timestamps();
+
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,8 @@ class ListingFactory extends Factory
             'email'=>$this->faker->companyEmail(),
             'website'=>$this->faker->url(),
             'location'=>$this->faker->city(),
-            'description'=>$this->faker->paragraph(5)
+            'description'=>$this->faker->paragraph(5),
+            'user_id' => User::factory()
 
             //
         ];

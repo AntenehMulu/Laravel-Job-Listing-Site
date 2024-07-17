@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\UserController;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,14 +20,30 @@ Route::get('/search',function(Request $request){
     return $request->city;
 });
 //Display all list
-Route::get('/listings', function () {
-    return view('listings',
-    ['heading'=>'Latest Listings',
-    'listings'=>Listing::all()
-    ]
-);
-});
+Route::get('/',[ListingController::class, 'index']);
+//create form
+Route::get('/listings/create',[ListingController::class, 'create'])->name('listings.create')->middleware('auth');
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 //Single List
-Route::get('/listings/{listing}',function(Listing $listing){
-    return view('listing',['listing'=>$listing]);
-});
+Route::get('/listings/{listing}',[ListingController::class,'show']);
+//store
+Route::Post('/listings',[ListingController::class,'store'])->name('listings.store')->middleware('auth');
+//edit
+Route::get('/listings/{listing}/edit',[ListingController::class,'edit'])->name('listings.edit')->middleware('auth');
+//update the gig info
+Route::put('/listings/{listing}',[ListingController::class,'update'])->name('listings.update')->middleware('auth');
+//delete the gig
+Route::delete('/listings/{listing}',[ListingController::class,'destroy'])->name('listings.delete')->middleware('auth');
+
+
+
+//user manangement
+Route::get('/register',[UserController::class,'register'])->middleware('guest');
+//add new user
+Route::post('/users', [UserController::class,'store']);
+//logout
+Route::post('/logout',[UserController::class,'logout'])->middleware('auth');
+//login form
+Route::get('/login',[UserController::class,'login'])->name('login');
+//login user
+Route::post('/users/authenticate',[UserController::class, 'authenticate']);
