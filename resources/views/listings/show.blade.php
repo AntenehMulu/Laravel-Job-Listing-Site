@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <x-card-detail class="mt-4 p-2 flex space-x-6">
+            {{-- <x-card-detail class="mt-4 p-2 flex space-x-6">
                 <a href="{{ route('listings.edit',['listing'=>$listing]) }}" >
                     <i class="fa-solid fa-pencil"></i>Edit
                 </a>
@@ -55,7 +55,7 @@
                     @method('delete')
                     <button class="text-red-500"><i class="fa-solid fa-trash"></i>Delete</button>
                 </form>
-            </x-card-detail>
+            </x-card-detail> --}}
         </x-card-detail>
     </div>
 </x-layout>
