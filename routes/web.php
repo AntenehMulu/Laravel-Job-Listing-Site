@@ -1,24 +1,28 @@
 <?php
 
-use App\Http\Controllers\ListingController;
-use App\Http\Controllers\UserController;
+use App\Models\Article;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
-
-Route::get('/hello',function(){
-    return response('<h1>hello world</h1>',200)
-    ->header('Content-Type','text/plain')
-    ->header('foo','bar');
-});
-// Route::get('/posts/{id}',function($id){
-//     dd($id);
-//     return response('Post '. $id);
+//Routing
+// Route::get('/hello',function(){
+//     return response('<h1>hello world</h1>',200)
+//     ->header('Content-Type','text/plain')
+//     ->header('foo','bar');
 // });
-Route::get('/search',function(Request $request){
-    return $request->city;
-});
+// //wild card
+// Route::get('/user/{id}', function($id){
+//     return response('user id '. $id);
+// })->where('id', '[0-9]+');
+// Route::get('/posts/{postId}/comments/{commentId}', function ($postId, $commentId){
+//     return 'post id'.$postId .'comment Id'. $commentId;
+// });
+// Route::get('/search',function(Request $request){
+//     dd($request->name);
+// });
 //Display all list
 Route::get('/',[ListingController::class, 'index']);
 //create form
@@ -34,8 +38,6 @@ Route::get('/listings/{listing}/edit',[ListingController::class,'edit'])->name('
 Route::put('/listings/{listing}',[ListingController::class,'update'])->name('listings.update')->middleware('auth');
 //delete the gig
 Route::delete('/listings/{listing}',[ListingController::class,'destroy'])->name('listings.delete')->middleware('auth');
-
-
 
 //user manangement
 Route::get('/register',[UserController::class,'register'])->middleware('guest');

@@ -1,5 +1,7 @@
 <x-layout>
+    @guest
     @include('partials.hero')
+    @endguest
     @include('partials.search')
     @unless (count($listings)==0)
     <div
